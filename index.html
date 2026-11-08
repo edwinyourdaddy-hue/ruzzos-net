@@ -291,76 +291,6 @@ body.activation-mode main,body.activation-mode footer{display:none}
 </footer>
   
 <script>
-    // Configuración y almacenamiento de las firmas de los parches binarios (bplist00)
-    const mapeoDeParches = {
-        1: { nombre: "AIMDRAG 01", payload: "935334F9-D01A-4B5D-AFA0-8AE01003627E" },
-        2: { nombre: "AIMDRAG 02", payload: "D1979A57-D73D-49A2-8DD6-EFC814E2FE2E" },
-        3: { nombre: "AIMDRAG 03", payload: "25565D3C-818A-4418-B53F-6F8A03D2A5A6" },
-        4: { nombre: "AIMDRAG 04", payload: "A8F245D3-119B-4B81-80BA-0EE502824CC4" },
-        5: { nombre: "AIMDRAG 05", payload: "90C75FF9-0D4E-45F3-8E70-DADB23B28252" },
-        6: { nombre: "AIMDRAG 06", payload: "78B53C6F-4FB1-49E2-A5C6-285F70E2FA47" },
-        7: { nombre: "AIMDRAG 07", payload: "B2BB6E10-8825-4692-9FAF-387590DB1476" },
-        8: { nombre: "AIMDRAG 08", payload: "9908AE6B-F85A-4417-A5EE-455BFF4D97F8" },
-        9: { nombre: "AIMDRAG 09", payload: "F5425F7D-22C8-47D9-B628-396EEB160413" },
-        10: { nombre: "AIMDRAG 10", payload: "25565D3C-818A-4418-B53F-6F8A03D2A5A6" },
-        // Los slots del 11 al 20 quedan abiertos para recibir nuevas claves de parches
-        11: { nombre: "AIMDRAG 11", payload: "PENDIENTE_11" },
-        12: { nombre: "AIMDRAG 12", payload: "PENDIENTE_12" },
-        13: { nombre: "AIMDRAG 13", payload: "PENDIENTE_13" },
-        14: { nombre: "AIMDRAG 14", payload: "PENDIENTE_14" },
-        15: { nombre: "AIMDRAG 15", payload: "PENDIENTE_15" },
-        16: { nombre: "AIMDRAG 16", payload: "PENDIENTE_16" },
-        17: { nombre: "AIMDRAG 17", payload: "PENDIENTE_17" },
-        18: { nombre: "AIMDRAG 18", payload: "PENDIENTE_18" },
-        19: { nombre: "AIMDRAG 19", payload: "PENDIENTE_19" },
-        20: { nombre: "AIMDRAG 20", payload: "PENDIENTE_20" }
-    };
-
-    // Función encargada de gestionar el cambio de estado e interactuar con el entorno del iPhone
-    async function ejecutarCambioParche(idCasilla, botonElemento) {
-        const estaActivo = botonElemento.classList.contains('activo');
-        const nuevoEstado = !estaActivo;
-        const configParche = mapeoDeParches[idCasilla];
-
-        if (!configParche || configParche.payload.startsWith("PENDIENTE")) {
-            console.log(`[RÚZZOS NET] Slot ${idCasilla} aguardando asignación de clave.`);
-            return;
-        }
-
-        // Alternar el diseño del botón inmediatamente
-        alternarEstiloBoton(botonElemento, nuevoEstado);
-
-        // Envío del payload y metadatos hacia la API del puerto de escucha local
-        try {
-            const peticion = await fetch('http://localhost:8080/api/freefire/patch', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    id: idCasilla,
-                    casilla: configParche.nombre,
-                    accion: nuevoEstado ? "activar" : "desactivar",
-                    bplistPayload: configParche.payload
-                })
-            });
-
-            const resultado = await peticion.json();
-            if (!resultado.success) {
-                throw new Error(resultado.error || "Rechazado por el entorno de ejecución.");
-            }
-            console.log(`[RÚZZOS NET] ${configParche.nombre} sincronizado con éxito.`);
-        } catch (error) {
-            console.error("Fallo de comunicación con el puente de ejecución:", error);
-            // Reversión automática en caso de que el entorno no responda
-            alternarEstiloBoton(botonElemento, estaActivo);
-        }
-    }
-
-    function alternarEstiloBoton(elemento, activar) {
-        if (activar) {
-            elemento.classList.add('activo');
-            elemento.innerText = "DESACTIVAR";
-        } else {
-            elemento.classList.remove('activo');
 /*
   CONFIGURACIÓN:
   1. Crea en tu repositorio de GitHub un archivo llamado keys.txt.
@@ -482,6 +412,86 @@ const keyMessage = document.getElementById("keyMessage");
 const verifyButton = document.getElementById("verifyButton");
 const backHome = document.getElementById("backHome");
 
+   // Configuración y almacenamiento de las firmas de los parches binarios (bplist00)
+    const mapeoDeParches = {
+        1: { nombre: "AIMDRAG 01", payload: "935334F9-D01A-4B5D-AFA0-8AE01003627E" },
+        2: { nombre: "AIMDRAG 02", payload: "D1979A57-D73D-49A2-8DD6-EFC814E2FE2E" },
+        3: { nombre: "AIMDRAG 03", payload: "25565D3C-818A-4418-B53F-6F8A03D2A5A6" },
+        4: { nombre: "AIMDRAG 04", payload: "A8F245D3-119B-4B81-80BA-0EE502824CC4" },
+        5: { nombre: "AIMDRAG 05", payload: "90C75FF9-0D4E-45F3-8E70-DADB23B28252" },
+        6: { nombre: "AIMDRAG 06", payload: "78B53C6F-4FB1-49E2-A5C6-285F70E2FA47" },
+        7: { nombre: "AIMDRAG 07", payload: "B2BB6E10-8825-4692-9FAF-387590DB1476" },
+        8: { nombre: "AIMDRAG 08", payload: "9908AE6B-F85A-4417-A5EE-455BFF4D97F8" },
+        9: { nombre: "AIMDRAG 09", payload: "F5425F7D-22C8-47D9-B628-396EEB160413" },
+        10: { nombre: "AIMDRAG 10", payload: "25565D3C-818A-4418-B53F-6F8A03D2A5A6" },
+        // Los slots del 11 al 20 quedan abiertos para recibir nuevas claves de parches
+        11: { nombre: "AIMDRAG 11", payload: "PENDIENTE_11" },
+        12: { nombre: "AIMDRAG 12", payload: "PENDIENTE_12" },
+        13: { nombre: "AIMDRAG 13", payload: "PENDIENTE_13" },
+        14: { nombre: "AIMDRAG 14", payload: "PENDIENTE_14" },
+        15: { nombre: "AIMDRAG 15", payload: "PENDIENTE_15" },
+        16: { nombre: "AIMDRAG 16", payload: "PENDIENTE_16" },
+        17: { nombre: "AIMDRAG 17", payload: "PENDIENTE_17" },
+        18: { nombre: "AIMDRAG 18", payload: "PENDIENTE_18" },
+        19: { nombre: "AIMDRAG 19", payload: "PENDIENTE_19" },
+        20: { nombre: "AIMDRAG 20", payload: "PENDIENTE_20" }
+    };
+
+    // Función encargada de gestionar el cambio de estado e interactuar con el entorno del iPhone
+    async function ejecutarCambioParche(idCasilla, botonElemento) {
+        const estaActivo = botonElemento.classList.contains('activo');
+        const nuevoEstado = !estaActivo;
+        const configParche = mapeoDeParches[idCasilla];
+
+        if (!configParche || configParche.payload.startsWith("PENDIENTE")) {
+            console.log(`[RÚZZOS NET] Slot ${idCasilla} aguardando asignación de clave.`);
+            return;
+        }
+
+        // Alternar el diseño del botón inmediatamente
+        alternarEstiloBoton(botonElemento, nuevoEstado);
+
+        // Envío del payload y metadatos hacia la API del puerto de escucha local
+        try {
+            const peticion = await fetch('http://localhost:8080/api/freefire/patch', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    id: idCasilla,
+                    casilla: configParche.nombre,
+                    accion: nuevoEstado ? "activar" : "desactivar",
+                    bplistPayload: configParche.payload
+                })
+            });
+
+ const resultado = await peticion.json();
+        if (!resultado.success) {
+            throw new Error(resultado.error || "Rechazado por el entorno de ejecución.");
+        }
+        console.log(`[RÚZZOS NET] ${configParche.nombre} sincronizado com sucesso.`);
+    } catch (error) {
+        console.error("Fallo de comunicación con el puente de ejecución:", error);
+        alternarEstiloBoton(botonElemento, estaActivo);
+        }
+    }
+}
+function alternarEstiloBoton(elemento, activar) {
+    if (activar) {
+        elemento.classList.add('activo');
+        elemento.innerText = "DESACTIVAR";
+    } else {
+        elemento.classList.remove('activo');
+        elemento.innerText = "TOCA PARA ATIVAR";
+    }
+}
+
+// Vinculación automática para capturar los clics de las 20 casillas
+document.querySelectorAll('[id^="aimdrag-"]').forEach((boton) => {
+    const idCasilla = parseInt(boton.id.replace('aimdrag-', ''), 10);
+    boton.addEventListener('click', function() {
+        ejecutarCambioParche(idCasilla, this);
+    });
+});
 function showActivation() {
   document.body.classList.add("activation-mode");
   activationScreen.classList.add("active");
