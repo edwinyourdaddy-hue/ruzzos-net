@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#000000">
+<meta name="description" content="Rúzzos Net: información y acceso a herramientas de conexión para gaming.">
+<title>RÚZZOS NET — Gaming Connection</title>
+<style>
+:root{
+  --bg:#000;--panel:#080808;--panel2:#101010;--line:#292929;
+  --text:#fff;--muted:#a3a3a3;--accent:#fff;--accent2:#d9d9d9;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:
+  radial-gradient(ellipse at 50% -15%,rgba(255,255,255,.07),transparent 42%),
+  var(--bg);color:var(--text);font-family:Inter,Arial,sans-serif;
+}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+header{height:82px;display:flex;align-items:center;border-bottom:1px solid rgba(255,255,255,.1)}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font-size:19px;font-weight:900;letter-spacing:2px}
+.brand span{color:#aaa}
+.nav-right{display:flex;align-items:center;gap:22px;color:#c7c7c7;font-size:13px}
+.status{display:inline-flex;align-items:center;gap:8px;color:#eee;font-size:12px}
+.dot{width:7px;height:7px;border-radius:50%;background:#fff;box-shadow:0 0 8px rgba(255,255,255,.35)}
+.hero{padding:76px 0 56px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid #383838;background:#0c0c0c;padding:9px 13px;border-radius:30px;color:#eee;font-size:11px;letter-spacing:1.3px;text-transform:uppercase}
+h1{font-size:clamp(38px,7vw,68px);line-height:1.02;letter-spacing:-2.5px;margin:27px auto 18px;max-width:850px}
+h1 span{color:#aaa}
+.lead{max-width:650px;margin:0 auto;color:var(--muted);font-size:16px;line-height:1.8}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:30px}
+.btn{display:inline-flex;justify-content:center;align-items:center;min-height:48px;padding:0 21px;border-radius:9px;font-size:13px;font-weight:800;transition:.2s}
+.btn-primary{background:#fff;color:#000;border:1px solid #fff}
+.btn-primary:hover{background:#dcdcdc;transform:translateY(-2px)}
+.btn-secondary{border:1px solid #444;background:#080808;color:#fff}
+.btn-secondary:hover{border-color:#fff;background:#151515}
+.hero .actions{width:min(100%,560px);margin-left:auto;margin-right:auto}.hero .actions .btn{flex:1 1 0;min-width:0}.discord-icon{width:16px;height:16px;margin-right:8px;flex:0 0 auto}
+.features{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:16px auto 70px}
+.feature,.info-card{background:linear-gradient(145deg,#111,#070707);border:1px solid var(--line);border-radius:13px;padding:22px}
+.feature-icon{width:38px;height:38px;display:grid;place-items:center;border:1px solid #444;border-radius:9px;background:#090909;color:#fff;margin-bottom:18px}
+.feature-icon svg{width:21px;height:21px;fill:none;stroke:#fff;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.feature h3,.info-card h3{font-size:15px;margin:0 0 8px}
+.feature p,.info-card p{font-size:13px;line-height:1.7;color:var(--muted);margin:0}
+.section-label{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:#cfcfcf;margin-bottom:12px}
+.section-title{font-size:clamp(26px,4vw,38px);letter-spacing:-1px;margin:0 0 13px}
+.about{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:18px 0 76px}
+.about-copy>p{color:var(--muted);font-size:14px;line-height:1.9;max-width:570px}
+.about-panel{border:1px solid #303030;border-radius:15px;background:linear-gradient(145deg,#151515,#080808);padding:25px}
+.panel-top{display:flex;justify-content:space-between;align-items:center;color:#aaa;font-size:11px;text-transform:uppercase;letter-spacing:1px;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.panel-mark{font-size:22px;color:#fff;font-weight:900}
+.panel-row{display:flex;justify-content:space-between;gap:15px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.07);font-size:13px}
+.panel-row span:last-child{color:#fff}
+.why{padding:12px 0 75px}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:25px}
+.info-card{min-height:150px}
+.info-card h3{margin-bottom:10px}
+.cta{padding:35px 25px 42px;text-align:center;border:1px solid #333;border-radius:16px;background:radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.07),transparent 70%),#090909;margin-bottom:65px}
+.cta h2{font-size:clamp(25px,4vw,36px);margin:0 0 12px}
+.cta p{color:var(--muted);font-size:14px;margin:0}
+.cta .actions{margin-top:22px}
+footer{border-top:1px solid rgba(255,255,255,.1);padding:25px 0 30px;color:var(--muted);font-size:12px}
+.footer-inner{display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap}
+.footer-links{display:flex;gap:17px;flex-wrap:wrap}
+footer a:hover{color:#fff}
+@media(max-width:760px){
+ .nav-right>a{display:none}.hero{padding:58px 0 40px}
+ .features,.cards{grid-template-columns:1fr}
+ .about{grid-template-columns:1fr;gap:22px;padding-bottom:55px}
+ .features{margin-bottom:55px}
+}
+
+/* Activación de keys */
+.activation-screen{display:none;min-height:calc(100vh - 82px);padding:70px 20px;align-items:flex-start;justify-content:center}
+.activation-screen.active{display:flex}
+.activation-box{width:min(100%,460px);margin:30px auto 0;text-align:center;background:#050505;border:1px solid #292929;border-radius:15px;padding:30px 24px}
+.activation-box h2{font-size:27px;margin:0 0 10px}
+.activation-box p{color:#a3a3a3;font-size:14px;line-height:1.7;margin:0 0 23px}
+.key-input{width:100%;height:50px;padding:0 15px;border-radius:9px;border:1px solid #444;background:#0b0b0b;color:#fff;font-size:14px;outline:none;margin-bottom:12px}
+.key-input:focus{border-color:#fff}
+.activation-submit,.back-button{width:100%;cursor:pointer}
+.activation-submit{background:#fff;color:#000;border:1px solid #fff}
+.back-button{margin-top:12px;background:#080808;color:#fff;border:1px solid #444}
+.activation-message{min-height:22px;margin:12px 0 0!important;font-size:13px!important}
+#emptyMemberArea{display:none;min-height:calc(100vh - 82px);background:#000}
+#emptyMemberArea.active{display:block}
+body.activation-mode main,body.activation-mode footer{display:none}
+@media(max-width:760px){.activation-screen{padding:38px 14px}.activation-box{margin-top:15px;padding:26px 18px}}
+
+
+/* Área desbloqueada: 20 controles monocromáticos */
+#memberArea{display:none;min-height:calc(100vh - 82px);padding:34px 18px 60px}
+#memberArea.active{display:block;animation:memberIn .45s ease both}
+@keyframes memberIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.member-heading{text-align:center;margin:10px auto 28px}
+.member-heading .section-label{color:#aaa}
+.member-heading h2{font-size:clamp(25px,5vw,38px);margin:8px 0}
+.member-heading p{color:#999;font-size:13px}
+.aim-grid{width:min(100%,900px);margin:auto;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.aim-card{min-height:132px;display:flex;align-items:center;gap:18px;padding:18px 20px;border:1px solid #292929;border-radius:25px;background:linear-gradient(135deg,rgba(28,28,28,.92),rgba(8,8,8,.94));box-shadow:0 8px 25px rgba(0,0,0,.25)}
+.aim-icon{width:68px;height:68px;flex:0 0 68px;border-radius:19px;background:#171717;display:grid;place-items:center;color:#fff}
+.aim-icon svg{width:34px;height:34px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.aim-copy{flex:1;min-width:0}
+.aim-copy h3{margin:0 0 8px;font-size:19px;letter-spacing:.5px}
+.aim-copy p{margin:0;color:#888;font-size:11px;font-weight:800;letter-spacing:1.6px}
+.aim-switch{width:82px;height:42px;flex:0 0 82px;border:0;border-radius:30px;background:#292929;padding:4px;cursor:pointer;transition:background .2s;display:flex;align-items:center}
+.aim-switch .knob{width:34px;height:34px;border-radius:50%;background:#fff;transition:transform .22s ease;box-shadow:0 1px 4px #0005}
+.aim-switch[aria-checked="true"]{background:#eee}
+.aim-switch[aria-checked="true"] .knob{transform:translateX(40px);background:#000}
+.aim-switch:focus-visible{outline:2px solid white;outline-offset:3px}
+.member-back{display:block;width:min(100%,300px);margin:26px auto 0}
+@media(max-width:600px){.aim-grid{grid-template-columns:1fr}.aim-card{min-height:120px;padding:16px}.aim-icon{width:60px;height:60px;flex-basis:60px}.aim-copy h3{font-size:17px}}
+
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#">RÚZZOS <span>NET</span></a>
+    <div class="nav-right">
+      <span class="status"><i class="dot"></i> RED OPERATIVA</span>
+      <a href="#que-es">Qué es</a>
+      <a href="#ventajas">Ventajas</a>
+      <a href="#acceso">Acceso</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow"><i class="dot"></i> INFRAESTRUCTURA / iOS + PC</div>
+    <h1>Conexión optimizada<br>para <span>gaming móvil.</span></h1>
+    <p class="lead">Una experiencia de conexión sencilla para tus partidas. Consulta la información de Rúzzos Net y conoce las opciones disponibles para tus dispositivos.</p>
+    <div class="actions">
+      <button class="btn btn-primary" type="button" id="openActivation">Activar mi key</button>
+      <a class="btn btn-secondary" href="https://discord.gg/PEGA_TU_INVITACION" target="_blank" rel="noopener noreferrer" aria-label="Abrir Discord">
+        <svg class="discord-icon" viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M19.7 5.3a18.5 18.5 0 0 0-4.6-1.4l-.6 1.2a17 17 0 0 0-5 0l-.6-1.2a18.5 18.5 0 0 0-4.6 1.4C1.4 9.6.6 13.8 1 18a18.7 18.7 0 0 0 5.7 2.9l1.2-1.9-1.8-.9.4-.3c3.5 1.6 7.4 1.6 10.9 0l.4.3-1.8.9 1.2 1.9A18.7 18.7 0 0 0 23 18c.5-4.9-.8-9-3.3-12.7ZM8.5 15.2c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Zm7 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2Z"/>
+        </svg>
+        Discord
+      </a>
+    </div>
+  </section>
+
+  <section class="features" aria-label="Características">
+    <article class="feature">
+      <div class="feature-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M2 8.8a15 15 0 0 1 20 0M5 12a10.5 10.5 0 0 1 14 0m-11 3.2a5.5 5.5 0 0 1 8 0M12 19h.01"/></svg>
+      </div>
+      <h3>Conexión estable</h3>
+      <p>Información sobre opciones de conexión pensadas para tus sesiones de juego.</p>
+    </article>
+    <article class="feature">
+      <div class="feature-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11Z"/><path d="m9 12 2 2 4-4"/></svg>
+      </div>
+      <h3>Conexión protegida</h3>
+      <p>Conoce las características de privacidad y seguridad de las opciones compatibles.</p>
+    </article>
+    <article class="feature">
+      <div class="feature-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24"><path d="M12 15V3m-5 5 5-5 5 5"/><path d="M5 13v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6"/></svg>
+      </div>
+      <h3>Configuración sencilla</h3>
+      <p>Consulta la guía de configuración y los pasos necesarios para comenzar.</p>
+    </article>
+  </section>
+
+  <section class="about" id="que-es">
+    <div class="about-copy">
+      <div class="section-label">QUÉ ES RÚZZOS NET</div>
+      <h2 class="section-title">Herramientas de conexión para gamers</h2>
+      <p>Rúzzos Net reúne información y recursos relacionados con la conectividad para gaming en iOS y PC. Revisa los detalles del servicio, comprueba la compatibilidad de tu dispositivo y consulta las instrucciones antes de configurar cualquier conexión.</p>
+      <a class="btn btn-secondary" href="#acceso">Ver información</a>
+    </div>
+    <div class="about-panel">
+      <div class="panel-top"><span>Rúzzos Net / Panel informativo</span><span class="panel-mark">RN.</span></div>
+      <div class="panel-row"><span>Plataformas</span><span>iOS + PC</span></div>
+      <div class="panel-row"><span>Guías de configuración</span><span>Disponibles</span></div>
+      <div class="panel-row"><span>Estado de esta demo</span><span>Interfaz</span></div>
+    </div>
+  </section>
+
+  <section class="why" id="ventajas">
+    <div class="section-label">POR QUÉ RÚZZOS NET</div>
+    <h2 class="section-title">Lo esencial, en un solo lugar</h2>
+    <div class="cards">
+      <article class="info-card">
+        <h3>Experiencia de conexión</h3>
+        <p>Encuentra información para entender las opciones disponibles y elegir la configuración adecuada.</p>
+      </article>
+      <article class="info-card">
+        <h3>Configuración clara</h3>
+        <p>Instrucciones organizadas para que puedas revisar cada paso antes de realizar cambios.</p>
+      </article>
+      <article class="info-card">
+        <h3>Ayuda y comunidad</h3>
+        <p>Consulta los canales oficiales de soporte cuando estén configurados por el administrador.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="cta" id="acceso">
+    <h2>¿Listo para conocer Rúzzos Net?</h2>
+    <p>Consulta la información de acceso y las guías disponibles.</p>
+    <div class="actions">
+      <a class="btn btn-primary" href="mailto:soporte@ruzzos.net?subject=Consulta%20R%C3%BAzzos%20Net">Contactar soporte</a>
+      <a class="btn btn-secondary" href="#que-es">Volver arriba ↑</a>
+    </div>
+  </section>
+</main>
+
+
+<section class="activation-screen" id="activationScreen" aria-label="Activar key">
+  <div class="activation-box">
+    <div class="section-label">RÚZZOS NET / ACTIVACIÓN</div>
+    <h2>Activar mi key</h2>
+    <p>Introduce tu key para comprobar el acceso.</p>
+    <form id="keyForm">
+      <input class="key-input" id="keyInput" type="text" placeholder="Introduce tu key aquí" autocomplete="off" autocapitalize="off" spellcheck="false" required>
+      <button class="btn activation-submit" type="submit" id="verifyButton">Verificar key</button>
+    </form>
+    <p class="activation-message" id="keyMessage" role="status" aria-live="polite"></p>
+    <button class="btn back-button" type="button" id="backHome">Volver al inicio</button>
+  </div>
+</section>
+
+<section id="memberArea" aria-label="Área desbloqueada"><div class="member-heading"><div class="section-label">RÚZZOS NET / MEMBROS</div><h2>PAINEL DE CONTROLES</h2><p>Ative ou desative cada opção manualmente.</p></div><div class="aim-grid" id="aimGrid"><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 01</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 01"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 02</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 02"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 03</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 03"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 04</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 04"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 05</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 05"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 06</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 06"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 07</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 07"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 08</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 08"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 09</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 09"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 10</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 10"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 11</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 11"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 12</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 12"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 13</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 13"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 14</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 14"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 15</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 15"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 16</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 16"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 17</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 17"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 18</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 18"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 19</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 19"><span class="knob"></span></button>
+</article><article class="aim-card">
+<div class="aim-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/><circle cx="12" cy="12" r="2"/></svg></div>
+<div class="aim-copy"><h3>AIMDRAG 20</h3><p class="toggle-status">TOCA PARA ATIVAR</p></div>
+<button class="aim-switch" type="button" role="switch" aria-checked="false" aria-label="Ativar AIMDRAG 20"><span class="knob"></span></button>
+</article></div><button class="btn back-button member-back" type="button" id="memberLogout">Voltar</button></section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div><strong style="color:#fff;letter-spacing:1px">RÚZZOS NET</strong><br><br>Información de conexión para gaming móvil y PC.</div>
+    <div class="footer-links">
+      <a href="#acceso">Acceso</a>
+      <a href="#que-es">Qué es</a>
+      <a href="#ventajas">Ventajas</a>
+    </div>
+    <div>© 2026 Rúzzos Net</div>
+  </div>
+</footer>
+
+<script>
+/*
+  CONFIGURACIÓN:
+  1. Crea en tu repositorio de GitHub un archivo llamado keys.txt.
+  2. Escribe una key por línea.
+  3. Pega abajo el enlace RAW del archivo keys.txt.
+  Ejemplo de formato: https://raw.githubusercontent.com/USUARIO/REPOSITORIO/main/keys.txt
+*/
+// 100 keys incluidas. En GitHub Pages el código y las keys son visibles.
+const VALID_KEYS = [
+  "ruzzos-net-7ew961",
+  "ruzzos-net-dchyxt",
+  "ruzzos-net-egtpl4",
+  "ruzzos-net-5artnd",
+  "ruzzos-net-2tfv85",
+  "ruzzos-net-okqfdn",
+  "ruzzos-net-x3a6li",
+  "ruzzos-net-qeexws",
+  "ruzzos-net-2e7vrr",
+  "ruzzos-net-ps51z8",
+  "ruzzos-net-geaskq",
+  "ruzzos-net-nqjhzw",
+  "ruzzos-net-j3yoi9",
+  "ruzzos-net-41b9on",
+  "ruzzos-net-k4p80h",
+  "ruzzos-net-58xncn",
+  "ruzzos-net-rx7zug",
+  "ruzzos-net-cslzgx",
+  "ruzzos-net-nogdrc",
+  "ruzzos-net-k38oxp",
+  "ruzzos-net-dcjn80",
+  "ruzzos-net-1hithg",
+  "ruzzos-net-i0a9fd",
+  "ruzzos-net-dy114w",
+  "ruzzos-net-mbjamd",
+  "ruzzos-net-njmih3",
+  "ruzzos-net-o79vlm",
+  "ruzzos-net-95ewzz",
+  "ruzzos-net-bekjoo",
+  "ruzzos-net-tcwfec",
+  "ruzzos-net-rf69px",
+  "ruzzos-net-g4bur4",
+  "ruzzos-net-pn80ro",
+  "ruzzos-net-yt7514",
+  "ruzzos-net-qy51ra",
+  "ruzzos-net-5al9wy",
+  "ruzzos-net-asr1cg",
+  "ruzzos-net-qcqz9z",
+  "ruzzos-net-cnepse",
+  "ruzzos-net-ofzdse",
+  "ruzzos-net-wmt96o",
+  "ruzzos-net-z1tztj",
+  "ruzzos-net-h3q1rm",
+  "ruzzos-net-j8aqbk",
+  "ruzzos-net-4d29as",
+  "ruzzos-net-rg6tey",
+  "ruzzos-net-lyw5e1",
+  "ruzzos-net-er3fe0",
+  "ruzzos-net-tjl0h9",
+  "ruzzos-net-6a8ikz",
+  "ruzzos-net-xttndi",
+  "ruzzos-net-mohlpx",
+  "ruzzos-net-6fmpmh",
+  "ruzzos-net-4pveiu",
+  "ruzzos-net-lzqqnn",
+  "ruzzos-net-2jt54p",
+  "ruzzos-net-2kfw3g",
+  "ruzzos-net-6yzuc7",
+  "ruzzos-net-ckbl7y",
+  "ruzzos-net-bdgng1",
+  "ruzzos-net-ypa0fm",
+  "ruzzos-net-2bake1",
+  "ruzzos-net-vf5a39",
+  "ruzzos-net-qu7lig",
+  "ruzzos-net-i49ui1",
+  "ruzzos-net-pcy3f5",
+  "ruzzos-net-habx9x",
+  "ruzzos-net-16167u",
+  "ruzzos-net-37f8za",
+  "ruzzos-net-k396mr",
+  "ruzzos-net-i1br09",
+  "ruzzos-net-j75oja",
+  "ruzzos-net-1ahtgt",
+  "ruzzos-net-untlqv",
+  "ruzzos-net-5ma6kk",
+  "ruzzos-net-ufvmni",
+  "ruzzos-net-jr1sp0",
+  "ruzzos-net-eynyt1",
+  "ruzzos-net-4lfirw",
+  "ruzzos-net-5817g5",
+  "ruzzos-net-5chpd8",
+  "ruzzos-net-3eolcw",
+  "ruzzos-net-yb3r76",
+  "ruzzos-net-81dyoi",
+  "ruzzos-net-7s6tbp",
+  "ruzzos-net-krtk7s",
+  "ruzzos-net-rmze07",
+  "ruzzos-net-wzqazs",
+  "ruzzos-net-rizh72",
+  "ruzzos-net-9u917m",
+  "ruzzos-net-lpo2ho",
+  "ruzzos-net-ljgsen",
+  "ruzzos-net-9jc6j5",
+  "ruzzos-net-evcx18",
+  "ruzzos-net-drgqm7",
+  "ruzzos-net-dm3a59",
+  "ruzzos-net-ivlbb2",
+  "ruzzos-net-jze0c8",
+  "ruzzos-net-pfhhak",
+  "ruzzos-net-ylm7n2"
+];
+const USED_KEYS_STORAGE = "ruzzos_net_used_keys_v1";
+
+const openActivation = document.getElementById("openActivation");
+const activationScreen = document.getElementById("activationScreen");
+const memberArea = document.getElementById("memberArea");
+const keyForm = document.getElementById("keyForm");
+const keyInput = document.getElementById("keyInput");
+const keyMessage = document.getElementById("keyMessage");
+const verifyButton = document.getElementById("verifyButton");
+const backHome = document.getElementById("backHome");
+
+function showActivation() {
+  document.body.classList.add("activation-mode");
+  activationScreen.classList.add("active");
+  memberArea.classList.remove("active");
+  keyMessage.textContent = "";
+  keyInput.value = "";
+  keyInput.focus();
+  window.scrollTo(0, 0);
+}
+
+function showHome() {
+  document.body.classList.remove("activation-mode");
+  activationScreen.classList.remove("active");
+  memberArea.classList.remove("active");
+  window.scrollTo(0, 0);
+}
+
+openActivation.addEventListener("click", showActivation);
+backHome.addEventListener("click", showHome);
+
+keyForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  const enteredKey = keyInput.value.trim();
+  if (!enteredKey) {
+    keyMessage.textContent = "Introduce una key para continuar.";
+    return;
+  }
+
+  const usedKeys = JSON.parse(localStorage.getItem(USED_KEYS_STORAGE) || "[]");
+  const normalizedKey = enteredKey.toLowerCase();
+  const valid = VALID_KEYS.some(key => key.toLowerCase() === normalizedKey);
+
+  if (!valid) {
+    keyMessage.textContent = "Key incorrecta. Comprueba que esté escrita correctamente.";
+    keyInput.focus();
+    verifyButton.disabled = false;
+    verifyButton.textContent = "Verificar key";
+    return;
+  }
+  if (usedKeys.includes(normalizedKey)) {
+    keyMessage.textContent = "Esta key ya fue usada en este navegador/dispositivo.";
+    verifyButton.disabled = false;
+    verifyButton.textContent = "Verificar key";
+    return;
+  }
+
+  usedKeys.push(normalizedKey);
+  localStorage.setItem(USED_KEYS_STORAGE, JSON.stringify(usedKeys));
+  activationScreen.classList.remove("active");
+  memberArea.classList.add("active");
+  window.scrollTo(0, 0);
+  verifyButton.disabled = false;
+  verifyButton.textContent = "Verificar key";
+});
+
+document.querySelectorAll(".aim-switch").forEach((toggle) => {
+  toggle.addEventListener("click", () => {
+    const enabled = toggle.getAttribute("aria-checked") !== "true";
+    toggle.setAttribute("aria-checked", String(enabled));
+    const status = toggle.closest(".aim-card").querySelector(".toggle-status");
+    status.textContent = enabled ? "ACTIVADO" : "TOCA PARA ACTIVAR";
+  });
+});
+document.getElementById("memberLogout").addEventListener("click", showHome);
+</script>
+
+</body>
+</html>
